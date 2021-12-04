@@ -1,5 +1,11 @@
+import Messages from "./components/Messages";
+
 function App() {
-	return <div className="App"></div>;
+	return (
+		<div className="App">
+			<Messages />
+		</div>
+	);
 }
 
 export default App;
