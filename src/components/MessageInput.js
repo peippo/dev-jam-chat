@@ -18,7 +18,7 @@ const MessageInput = () => {
 		try {
 			await supabase
 				.from("messages")
-				.insert({ username: username, content: message });
+				.insert({ username: username, content: message, type: "message" });
 		} catch (error) {
 			console.log("Error on submit: ", error);
 		} finally {

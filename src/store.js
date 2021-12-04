@@ -24,6 +24,10 @@ export const StoreProvider = ({ children }) => {
 			console.log(data);
 			setMessages(data);
 			subscribeMessages();
+
+			if (!data.some((row) => row.username === username)) {
+				announceUser();
+			}
 		} else {
 			setErrorMessage(error.message);
 			setIsError(true);
@@ -43,13 +47,27 @@ export const StoreProvider = ({ children }) => {
 		}
 	};
 
+	const announceUser = async () => {
+		try {
+			await supabase.from("messages").insert({
+				username: username,
+				content: "has joined the chat",
+				type: "server",
+			});
+		} catch (error) {
+			console.log("error: ", error);
+		}
+	};
+
 	const addNewMessage = (payload) => {
 		setMessages((messages) => [...messages, payload.new]);
 	};
 
 	useEffect(() => {
 		setUsername(localStorage.getItem("username"));
-		fetchMessages();
+		if (username) {
+			fetchMessages();
+		}
 
 		return () => {
 			supabase.removeSubscription(subscription);
@@ -57,7 +75,7 @@ export const StoreProvider = ({ children }) => {
 
 		// FIXME:
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [username]);
 
 	const store = {
 		supabase,
