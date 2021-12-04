@@ -10,6 +10,7 @@ export const StoreProvider = ({ children }) => {
 	);
 
 	let subscription = null;
+	const [username, setUsername] = useState(null);
 	const [messages, setMessages] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [isError, setIsError] = useState(false);
@@ -47,6 +48,7 @@ export const StoreProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
+		setUsername(localStorage.getItem("username"));
 		fetchMessages();
 
 		return () => {
@@ -62,6 +64,7 @@ export const StoreProvider = ({ children }) => {
 		isLoading,
 		error: [isError, errorMessage],
 		messages,
+		username: [username, setUsername],
 	};
 
 	return (

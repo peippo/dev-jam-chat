@@ -2,7 +2,10 @@ import { useContext, useState } from "react";
 import { StoreContext } from "../store";
 
 const MessageInput = () => {
-	const { supabase } = useContext(StoreContext);
+	const {
+		supabase,
+		username: [username],
+	} = useContext(StoreContext);
 
 	const [message, setMessage] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -10,13 +13,12 @@ const MessageInput = () => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		if (isSubmitting) return;
-
 		setIsSubmitting(true);
 
 		try {
 			await supabase
 				.from("messages")
-				.insert({ username: "anonymous", content: message });
+				.insert({ username: username, content: message });
 		} catch (error) {
 			console.log("Error on submit: ", error);
 		} finally {
