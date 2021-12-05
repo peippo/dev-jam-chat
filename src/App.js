@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { StoreContext } from "./store";
+import Header from "./components/Header";
 import Messages from "./components/Messages";
 import MessageInput from "./components/MessageInput";
 import UsernamePrompt from "./components/UsernamePrompt";
@@ -10,16 +11,19 @@ function App() {
 	} = useContext(StoreContext);
 
 	return (
-		<div className="App">
+		<>
+			<Header />
 			{username ? (
 				<>
-					<Messages />
+					<main>
+						<Messages />
+					</main>
 					<MessageInput />
 				</>
 			) : (
 				<UsernamePrompt />
 			)}
-		</div>
+		</>
 	);
 }
 

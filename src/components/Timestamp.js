@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 const Timestamp = ({ createdAt }) => {
 	const date = new Date(createdAt);
 
@@ -14,10 +16,14 @@ const Timestamp = ({ createdAt }) => {
 	const s = addLeadingZero(date.getSeconds());
 
 	return (
-		<span>
+		<StyledTimestamp dateTime={createdAt}>
 			[{h}:{m}:{s}]
-		</span>
+		</StyledTimestamp>
 	);
 };
+
+const StyledTimestamp = styled.time`
+	margin-right: 0.5rem;
+`;
 
 export default Timestamp;

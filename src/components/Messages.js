@@ -8,11 +8,11 @@ const Messages = () => {
 	return (
 		<>
 			{!isLoading && (
-				<div>
+				<ul aria-label="Chat messages">
 					{messages.map((message) => (
 						<Message key={message.id} message={message} />
 					))}
-				</div>
+				</ul>
 			)}
 		</>
 	);
