@@ -17,13 +17,22 @@ const Timestamp = ({ createdAt }) => {
 
 	return (
 		<StyledTimestamp dateTime={createdAt}>
-			[{h}:{m}:{s}]
+			[
+			<Color>
+				{h}:{m}:{s}
+			</Color>
+			]
 		</StyledTimestamp>
 	);
 };
 
 const StyledTimestamp = styled.time`
 	margin-right: 0.5rem;
+	color: var(--highlight-color-gray);
+`;
+
+const Color = styled.span`
+	color: var(--highlight-color-pink);
 `;
 
 export default Timestamp;

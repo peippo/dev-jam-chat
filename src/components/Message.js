@@ -6,13 +6,13 @@ const Message = ({ message }) => {
 		<Row aria-live="polite">
 			{message.type === "message" && (
 				<>
-					<Timestamp createdAt={message.created_at} />{" "}
-					<Nickname>&lt;{message.username}&gt;</Nickname> {message.content}
+					<Timestamp createdAt={message.created_at} /> &lt;
+					<Nickname>{message.username}</Nickname>&gt; {message.content}
 				</>
 			)}
 			{message.type === "server" && (
 				<>
-					<Timestamp createdAt={message.created_at} /> **{" "}
+					<Timestamp createdAt={message.created_at} /> ***{" "}
 					<Nickname isServerMessage={true}>{message.username}</Nickname>{" "}
 					{message.content}
 				</>
@@ -26,7 +26,8 @@ const Row = styled.li`
 `;
 
 const Nickname = styled.strong`
-	margin: ${(props) => (props.isServerMessage ? "0 0.5rem" : "0 0.5rem 0 0")};
+	margin: ${(props) => (props.isServerMessage ? "0 0.5rem" : "0")};
+	color: var(--highlight-color-cyan);
 `;
 
 export default Message;

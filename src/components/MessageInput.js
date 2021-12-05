@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { StoreContext } from "../store";
 import styled, { css, keyframes } from "styled-components";
 
@@ -7,6 +7,8 @@ const MessageInput = () => {
 		supabase,
 		username: [username],
 	} = useContext(StoreContext);
+
+	const inputRef = useRef(null);
 
 	const [message, setMessage] = useState("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,25 +34,53 @@ const MessageInput = () => {
 		}
 	};
 
+	useEffect(() => {
+		inputRef.current.focus();
+	}, []);
+
 	return (
 		<Footer>
-			[#devjamchat]
-			<form onSubmit={handleSubmit}>
-				<InputWrapper showBlink={!message && !isFocused}>
+			<Form
+				onSubmit={handleSubmit}
+				onClick={() => inputRef.current.focus()}
+				autocomplete="off"
+				spellcheck="false"
+			>
+				<label htmlFor="msg-input">[#devjamchat]</label>
+				<InputWrapper showBlink={isFocused} characterCount={message.length}>
 					<Input
+						id="msg-input"
 						value={message}
 						onChange={(event) => setMessage(event.target.value)}
 						onFocus={onFocus}
 						onBlur={onBlur}
+						ref={inputRef}
 					/>
 				</InputWrapper>
-			</form>
+			</Form>
 		</Footer>
 	);
 };
 
+const Form = styled.form`
+	display: flex;
+	width: 100%;
+	position: relative;
+	margin-top: 20px;
+
+	&:before {
+		content: "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+		color: var(--background-color);
+		position: absolute;
+		top: -20px;
+		left: 0;
+		width: 100%;
+		height: 20px;
+		background-color: var(--highlight-color-yellow);
+	}
+`;
+
 const Footer = styled.footer`
-	border-top: 20px solid gray;
 	display: flex;
 `;
 
@@ -59,6 +89,8 @@ const blinkAnimation = keyframes`
 `;
 
 const InputWrapper = styled.div`
+	width: 100%;
+
 	${(props) =>
 		props.showBlink &&
 		css`
@@ -67,11 +99,11 @@ const InputWrapper = styled.div`
 			&:before {
 				content: "";
 				position: absolute;
-				top: 2px;
-				left: 0.5rem;
+				top: 3px;
+				left: calc(${(props) => props.characterCount * 1}ch + 2px);
 				width: 0.5rem;
 				height: 1rem;
-				background-color: gray;
+				background-color: var(--highlight-color-yellow);
 				opacity: 1;
 				animation-name: ${blinkAnimation};
 				animation-duration: 1s;
@@ -82,7 +114,18 @@ const InputWrapper = styled.div`
 
 const Input = styled.input`
 	width: 100%;
-	margin: 0 0 0 0.5rem;
+	background: transparent;
+	border: 0;
+	color: var(--text-color);
+	font-size: inherit;
+	caret-color: transparent;
+	font-family: var(--font-family);
+	font-variant-ligatures: none;
+	margin: 0;
+
+	&:focus {
+		outline: 0;
+	}
 `;
 
 export default MessageInput;

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { StoreContext } from "../store";
+import styled from "styled-components";
 import Message from "./Message";
 
 const Messages = () => {
@@ -8,14 +9,18 @@ const Messages = () => {
 	return (
 		<>
 			{!isLoading && (
-				<ul aria-label="Chat messages">
+				<List aria-label="Chat messages">
 					{messages.map((message) => (
 						<Message key={message.id} message={message} />
 					))}
-				</ul>
+				</List>
 			)}
 		</>
 	);
 };
+
+const List = styled.ul`
+	margin: 0 5px 10px;
+`;
 
 export default Messages;
