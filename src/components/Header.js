@@ -8,20 +8,20 @@ const Header = () => {
 	} = useContext(StoreContext);
 
 	return (
-		<StyledHeader isLogged={username}>
-			<Logo>
+		<StyledHeader>
+			<Logo isLogged={username}>
 				<Pre>
 					{`
               ▄                               
               █▒  ░| d e v   j a m |░   ▄     
               ██                       ██     
      ▄█████▄  ██ ▄███▄▄     ▄█████▄ ▀███████▄ ..
-   ▄█▒     ▀█ ███▀    ▀█▄  ▀▀    ▒██   ▓█
-   ██ ░░░░░   ██    ░░ ▓█ ▄█████████ ░ ▓█  ░░ ░
-   ▀██▄▄   ▄█ ██  ░░░░ ▓█ ██▄     ▓█ ░ ▓█▄
+   ▄█▒ ___ ▀█ ███▀  __▀█▄  ▀▀    ▒██ _ ▓█  __
+   ██ ░░░░░   ██   _░░ ▓█ ▄█████████ ░ ▓█  ░░ ░
+   ▀██▄▄   ▄█ ██ _░░░░ ▓█ ██▄     ▓█ ░ ▓█▄
      ▀▀████▀  ██ ░░░░░ ██  ▀█████▀██▄  ▀████▀
  -=/───────── █▒ ────────────────────────────/=-
-  ░ ▒▒ ▒▒▒▒░░ ▀  ░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░ ▒░ ░
+  ░ ▒▒ ▒▒▒▒░░ ▀  ░░░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒░ ▒░ ░
               :
  `}
 				</Pre>
@@ -31,12 +31,38 @@ const Header = () => {
 };
 
 const StyledHeader = styled.header`
-	transition: filter 2s;
-	filter: ${(props) =>
-		props.isLogged ? "none" : "saturate(0) brightness(0.3)"};
+	position: relative;
+
+	&:before {
+		content: "";
+		position: absolute;
+		bottom: -1.5rem;
+		left: 0;
+		height: 1.5rem;
+		width: calc(100% - 20px);
+		background: linear-gradient(
+			to bottom,
+			var(--background-color),
+			var(--background-color-transparent)
+		);
+		z-index: 1;
+	}
+
+	&:after {
+		content: "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
+		position: absolute;
+		bottom: -1.5rem;
+		left: 0;
+		width: calc(100% - 20px);
+		overflow: hidden;
+		color: var(--background-color);
+	}
 `;
 
 const Logo = styled.div`
+	transition: filter 2s;
+	filter: ${(props) =>
+		props.isLogged ? "none" : "saturate(0) brightness(0.3)"};
 	overflow: hidden;
 `;
 

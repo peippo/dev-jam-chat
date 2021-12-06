@@ -20,7 +20,7 @@ const Messages = () => {
 };
 
 const List = styled.ul`
-	margin: 0 5px 10px;
+	margin: 30px 5px 10px;
 `;
 
 export default Messages;

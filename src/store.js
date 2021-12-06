@@ -9,6 +9,8 @@ export const StoreProvider = ({ children }) => {
 		process.env.REACT_APP_SUPABASE_KEY
 	);
 
+	const fetchMessageCount = 49;
+
 	let subscription = null;
 	const [username, setUsername] = useState(null);
 	const [messages, setMessages] = useState([]);
@@ -17,12 +19,15 @@ export const StoreProvider = ({ children }) => {
 	const [errorMessage, setErrorMessage] = useState(null);
 
 	const fetchMessages = async () => {
-		const { data, error } = await supabase.from("messages").select();
+		const { data, error } = await supabase
+			.from("messages")
+			.select()
+			.range(0, fetchMessageCount)
+			.order("id", { ascending: false });
 		setIsLoading(false);
 
 		if (!error) {
-			console.log(data);
-			setMessages(data);
+			setMessages(data.reverse());
 			subscribeMessages();
 
 			if (!data.some((row) => row.username === username)) {
@@ -33,6 +38,28 @@ export const StoreProvider = ({ children }) => {
 			setIsError(true);
 			supabase.removeSubscription(subscription);
 			subscription = null;
+		}
+	};
+
+	const fetchOlderMessages = async () => {
+		setIsLoading(true);
+
+		const currentMessageCount = messages.length;
+
+		const { data, error } = await supabase
+			.from("messages")
+			.select()
+			.range(currentMessageCount, fetchMessageCount + currentMessageCount)
+			.order("id", { ascending: false });
+
+		setIsLoading(false);
+
+		if (!error) {
+			const newMessages = data.reverse();
+			setMessages((messages) => [...newMessages, ...messages]);
+		} else {
+			setErrorMessage(error.message);
+			setIsError(true);
 		}
 	};
 
@@ -82,6 +109,7 @@ export const StoreProvider = ({ children }) => {
 		isLoading,
 		error: [isError, errorMessage],
 		messages,
+		fetchOlderMessages,
 		username: [username, setUsername],
 	};
 
