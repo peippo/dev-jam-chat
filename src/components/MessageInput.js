@@ -58,6 +58,7 @@ const Form = styled.form`
 		width: 100%;
 		height: 20px;
 		background-color: var(--highlight-color-yellow);
+		overflow: hidden;
 	}
 `;
 

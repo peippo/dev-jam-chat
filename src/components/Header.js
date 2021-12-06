@@ -1,8 +1,14 @@
+import { useContext } from "react";
+import { StoreContext } from "../store";
 import styled from "styled-components";
 
 const Header = () => {
+	const {
+		username: [username],
+	} = useContext(StoreContext);
+
 	return (
-		<header>
+		<StyledHeader isLogged={username}>
 			<Logo>
 				<Pre>
 					{`
@@ -20,9 +26,15 @@ const Header = () => {
  `}
 				</Pre>
 			</Logo>
-		</header>
+		</StyledHeader>
 	);
 };
+
+const StyledHeader = styled.header`
+	transition: filter 2s;
+	filter: ${(props) =>
+		props.isLogged ? "none" : "saturate(0) brightness(0.3)"};
+`;
 
 const Logo = styled.div`
 	overflow: hidden;

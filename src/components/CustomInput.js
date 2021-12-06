@@ -1,7 +1,13 @@
 import { useState, useRef, useEffect } from "react";
 import styled, { css, keyframes } from "styled-components";
 
-const CustomInput = ({ value, setValue, visibleLabel, screenReaderLabel }) => {
+const CustomInput = ({
+	value,
+	setValue,
+	visibleLabel,
+	screenReaderLabel,
+	...rest
+}) => {
 	const [isFocused, setIsFocused] = useState(false);
 
 	const inputRef = useRef(null);
@@ -13,11 +19,16 @@ const CustomInput = ({ value, setValue, visibleLabel, screenReaderLabel }) => {
 		inputRef.current?.focus();
 	}, [inputRef]);
 
+	useEffect(() => {
+		inputRef.current?.focus();
+		inputRef.current?.setSelectionRange(value.length, value.length);
+	}, [value]);
+
 	return (
 		<>
 			<label htmlFor="msg-input">
 				<span aria-hidden="true">{visibleLabel}</span>
-				<span class="screen-reader-text">{screenReaderLabel}</span>
+				<span className="screen-reader-text">{screenReaderLabel}</span>
 			</label>
 			<InputWrapper showBlink={isFocused} characterCount={value.length}>
 				<Input
@@ -30,6 +41,7 @@ const CustomInput = ({ value, setValue, visibleLabel, screenReaderLabel }) => {
 					autoComplete="off"
 					spellCheck="false"
 					autoFocus
+					{...rest}
 				/>
 			</InputWrapper>
 		</>
