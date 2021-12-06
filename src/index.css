@@ -98,3 +98,22 @@ article {
 	flex-direction: column;
 	overflow-y: auto;
 }
+
+main {
+	scrollbar-width: thin;
+	scrollbar-color: var(--highlight-color-cyan) var(--background-color);
+}
+
+main::-webkit-scrollbar-track {
+	background: var(--background-color);
+}
+
+main::-webkit-scrollbar-thumb {
+	background-color: var(--highlight-color-cyan);
+	border-radius: 0;
+	border: 3px solid var(--background-color);
+}
+
+main::-webkit-scrollbar {
+	width: 10px;
+}
