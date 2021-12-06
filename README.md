@@ -47,7 +47,7 @@ Create Supabase table `messages` with the following columns:
 | -------- | --------- | ------------- | ------- | ----------- |
 | id       | timestamp | now()         |         | -           |
 | username | varchar   |               |         | -           |
-| content  | text      |               |         |             |
+| content  | text      |               |         | -           |
 | type     | varchar   |               |         | -           |
 
 Create a `.env` file to project root containing your Supabase info:
@@ -57,7 +57,12 @@ REACT_APP_SUPABASE_URL=<database_endpoint_url>
 REACT_APP_SUPABASE_KEY=<public_api_key>
 ```
 
-`$ npm install`
-`$ npm start`
+```
+> npm install
+```
+
+```
+> npm start
+```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
