@@ -1,4 +1,4 @@
-<img src="https://github.com/peippo/dev-jam-chat/blob/ed4c66aa7f5344c7ec0263c60a5c524d6c55e3bf/public/share.png" alt="Banner image">
+<img src="https://github.com/peippo/dev-jam-chat/blob/f53d5aa8e17279d7407804ea35c0924f589defaf/public/share.png" alt="Banner image">
 
 # Real-time Chat App
 
