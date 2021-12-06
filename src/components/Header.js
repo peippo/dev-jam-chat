@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { StoreContext } from "../store";
 import styled from "styled-components";
+import NicknameDisplay from "./NicknameDisplay";
 
 const Header = () => {
 	const {
@@ -26,6 +27,7 @@ const Header = () => {
  `}
 				</Pre>
 			</Logo>
+			{username && <NicknameDisplay />}
 		</StyledHeader>
 	);
 };

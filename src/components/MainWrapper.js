@@ -54,8 +54,6 @@ const Wrapper = styled.main`
 `;
 
 const LoadMoreButton = styled.button`
-	font-family: var(--font-family);
-	font-size: inherit;
 	position: absolute;
 	top: 0;
 	left: 50%;
@@ -63,11 +61,7 @@ const LoadMoreButton = styled.button`
 	z-index: 10;
 	opacity: ${(props) => (props.isVisible ? "1" : "0")};
 	transition: opacity 1s;
-	font-size: inherit;
 	margin-left: 1rem;
-	background: none;
-	border: 0;
-	padding: 0;
 	white-space: nowrap;
 	color: var(--highlight-color-yellow);
 	border-bottom: 2px solid var(--highlight-color-yellow);

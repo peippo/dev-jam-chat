@@ -78,12 +78,7 @@ const Controls = styled.div`
 `;
 
 const Button = styled.button`
-	font-family: var(--font-family);
-	font-size: inherit;
 	margin-left: 1rem;
-	background: none;
-	border: 0;
-	padding: 0;
 	white-space: nowrap;
 	color: var(--highlight-color-yellow);
 	border-bottom: 2px solid var(--highlight-color-yellow);
