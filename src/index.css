@@ -80,7 +80,7 @@ body {
 	max-width: 1024px;
 	padding: 5px;
 	border-left: 2px double;
-	border-width: 2px;
+	border-width: 0 0 0 2px;
 	border-image-slice: 1;
 	border-image-source: linear-gradient(
 		to top,
