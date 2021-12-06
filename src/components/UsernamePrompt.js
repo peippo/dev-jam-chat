@@ -46,11 +46,11 @@ const UsernamePrompt = () => {
 						style={{ width: "10ch" }}
 					/>
 					<Button disabled={!usernameValue || usernameValue.length <= 2}>
-						[░ ok ░]
+						ok
 					</Button>
 				</Form>
 
-				<Button onClick={handleRandomizeClick}>[░ random nick ░]</Button>
+				<Button onClick={handleRandomizeClick}>random nick</Button>
 			</Controls>
 		</>
 	);
@@ -78,6 +78,7 @@ const Controls = styled.div`
 `;
 
 const Button = styled.button`
+	font-family: var(--font-family);
 	font-size: inherit;
 	margin-left: 1rem;
 	background: none;
@@ -86,6 +87,14 @@ const Button = styled.button`
 	white-space: nowrap;
 	color: var(--highlight-color-yellow);
 	border-bottom: 2px solid var(--highlight-color-yellow);
+
+	&:before {
+		content: "[░ ";
+	}
+
+	&:after {
+		content: " ░]";
+	}
 
 	&:hover {
 		cursor: pointer;
