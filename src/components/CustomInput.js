@@ -9,8 +9,26 @@ const CustomInput = ({
 	...rest
 }) => {
 	const [isFocused, setIsFocused] = useState(false);
+	const [caretPosition, setCaretPosition] = useState(0);
 
 	const inputRef = useRef(null);
+
+	const handleChange = (event) => {
+		setValue(event.target.value);
+		setCaretPosition(inputRef.current.selectionStart);
+	};
+
+	const handleClick = () => {
+		setCaretPosition(inputRef.current.selectionStart);
+	};
+
+	const handleKeyDown = (event) => {
+		if (event.key === "ArrowLeft") {
+			setCaretPosition(Math.max(caretPosition - 1, 0));
+		} else if (event.key === "ArrowRight") {
+			setCaretPosition(Math.min(caretPosition + 1, value.length));
+		}
+	};
 
 	const onFocus = () => setIsFocused(true);
 	const onBlur = () => setIsFocused(false);
@@ -21,7 +39,7 @@ const CustomInput = ({
 
 	useEffect(() => {
 		inputRef.current?.focus();
-		inputRef.current?.setSelectionRange(value.length, value.length);
+		setCaretPosition(value.length);
 	}, [value]);
 
 	return (
@@ -30,11 +48,13 @@ const CustomInput = ({
 				<span aria-hidden="true">{visibleLabel}</span>
 				<span className="screen-reader-text">{screenReaderLabel}</span>
 			</label>
-			<InputWrapper showBlink={isFocused} characterCount={value.length}>
+			<InputWrapper showBlink={isFocused} caretPosition={caretPosition}>
 				<Input
 					id="msg-input"
 					value={value}
-					onChange={(event) => setValue(event.target.value)}
+					onChange={handleChange}
+					onClick={handleClick}
+					onKeyDown={handleKeyDown}
 					onFocus={onFocus}
 					onBlur={onBlur}
 					ref={inputRef}
@@ -64,7 +84,7 @@ const InputWrapper = styled.div`
 				content: "";
 				position: absolute;
 				top: 3px;
-				left: calc(${(props) => props.characterCount * 1}ch + 2px);
+				left: calc(${(props) => props.caretPosition * 1}ch + 2px);
 				width: 0.5rem;
 				height: 1rem;
 				background-color: var(--highlight-color-yellow);
