@@ -23,27 +23,28 @@ const StyledHeader = styled.header`
 	${(props) =>
 		props.isLogged &&
 		css`
+			&:before,
+			&:after {
+				position: absolute;
+				left: 0;
+				width: calc(100% - 20px);
+				z-index: 1;
+			}
+
 			&:before {
 				content: "";
-				position: absolute;
 				bottom: -1.5rem;
-				left: 0;
 				height: 1.5rem;
-				width: calc(100% - 20px);
 				background: linear-gradient(
 					to bottom,
 					var(--background-color),
 					var(--background-color-transparent)
 				);
-				z-index: 1;
 			}
 
 			&:after {
 				content: "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒";
-				position: absolute;
 				bottom: -1.5rem;
-				left: 0;
-				width: calc(100% - 20px);
 				overflow: hidden;
 				color: var(--background-color);
 			}
