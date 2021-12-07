@@ -23,8 +23,6 @@ const CustomInput = ({
 	};
 
 	const handleKeyDown = (event) => {
-		console.log("event.key: ", event.key);
-		console.log("event.keyCode: ", event.keyCode);
 		if (event.key === "ArrowLeft" || event.keyCode === 37) {
 			setCaretPosition(Math.max(caretPosition - 1, 0));
 		} else if (event.key === "ArrowRight" || event.keyCode === 39) {
@@ -38,11 +36,6 @@ const CustomInput = ({
 	useEffect(() => {
 		inputRef.current?.focus();
 	}, [inputRef]);
-
-	useEffect(() => {
-		inputRef.current?.focus();
-		setCaretPosition(value.length);
-	}, [value]);
 
 	return (
 		<>
