@@ -25,17 +25,17 @@ Real-time chat interface where multiple users can interact with each other by se
 -  [✓] The messages will be visible to all the Users that are in the chat app (using WebSockets)
 -  [✓] When a new User joins the chat, a message is displayed to all the existing Users
 -  [✓] Messages are saved in a database
--  [ ] User can send images, videos and links which will be displayed properly
--  [ ] User can select and send an emoji
--  [ ] Users can chat in private
--  [ ] Users can join `channels` on specific topics
+-  [-] User can send images, videos and links which will be displayed properly
+-  [-] User can select and send an emoji
+-  [-] Users can chat in private
+-  [-] Users can join `channels` on specific topics
 
 ## Tech
 
 -  [React](https://reactjs.org/)
 -  [Supabase](https://supabase.com/) - database & realtime updates via websockets
--  [Styled Components](https://styled-components.com/) - for styling components in addition to basic CSS
--  [Heroku](https://www.heroku.com) - cloud hosting platform
+-  [Styled Components](https://styled-components.com/) - styling components in addition to plain CSS
+-  [Heroku](https://www.heroku.com) - free cloud hosting platform
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -43,12 +43,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Create Supabase table `messages` with the following columns:
 
-| name     | type      | default value | primary | is nullable |
-| -------- | --------- | ------------- | ------- | ----------- |
-| id       | timestamp | now()         |         | -           |
-| username | varchar   |               |         | -           |
-| content  | text      |               |         | -           |
-| type     | varchar   |               |         | -           |
+| name       | type       | default value | primary | is nullable |
+| ---------- | ---------- | ------------- | ------- | ----------- |
+| id         | int8       |               | x       | -           |
+| created_at | timestampz | now()         |         | -           |
+| username   | varchar    |               |         | -           |
+| content    | text       |               |         | -           |
+| type       | varchar    |               |         | -           |
 
 Create a `.env` file to project root containing your Supabase info:
 
@@ -57,11 +58,10 @@ REACT_APP_SUPABASE_URL=<database_endpoint_url>
 REACT_APP_SUPABASE_KEY=<public_api_key>
 ```
 
-```
-> npm install
-```
+Run the following commands in the project directory:
 
 ```
+> npm install
 > npm start
 ```
 
