@@ -69,6 +69,7 @@ const blinkAnimation = keyframes`
 
 const InputWrapper = styled.div`
 	width: 100%;
+	overflow: hidden;
 
 	${(props) =>
 		props.showBlink &&
