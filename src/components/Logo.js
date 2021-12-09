@@ -36,6 +36,7 @@ const StyledLogo = styled.div`
 `;
 
 const Pre = styled.pre`
+	font-family: var(--font-family);
 	margin: 0;
 	line-height: 95%;
 	background: linear-gradient(
