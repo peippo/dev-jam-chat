@@ -14,7 +14,7 @@ const MessageInput = () => {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		if (isSubmitting) return;
+		if (isSubmitting || !message) return;
 		setIsSubmitting(true);
 
 		try {
