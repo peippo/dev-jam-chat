@@ -23,10 +23,13 @@ const CustomInput = ({
 	};
 
 	const handleKeyDown = (event) => {
+		console.log(event.keyCode);
 		if (event.key === "ArrowLeft" || event.keyCode === 37) {
 			setCaretPosition(Math.max(caretPosition - 1, 0));
 		} else if (event.key === "ArrowRight" || event.keyCode === 39) {
 			setCaretPosition(Math.min(caretPosition + 1, value.length));
+		} else if (event.key === "Enter" || event.keyCode === 13) {
+			setCaretPosition(0);
 		}
 	};
 
