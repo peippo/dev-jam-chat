@@ -97,7 +97,9 @@ export const StoreProvider = ({ children }) => {
 		}
 
 		return () => {
-			supabase.removeSubscription(subscription);
+			if (subscription) {
+				supabase.removeSubscription(subscription);
+			}
 		};
 
 		// FIXME:
