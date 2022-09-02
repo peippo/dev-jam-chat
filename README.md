@@ -4,9 +4,7 @@
 
 A real-time chat app in the style of old-school [BBS](https://en.wikipedia.org/wiki/Bulletin_board_system)' & [IRC](https://en.wikipedia.org/wiki/Internet_Relay_Chat), built as part of a weekly programming challenge hosted by [DevJam](https://devjam.vercel.app/).
 
-### <a href="https://dev-jam-chat.herokuapp.com/">Open the project</a>
-
-Note: the app is running on Heroku and is probably sleeping, it will take a short while to wake up.
+### <a href="https://dev-jam-chat.up.railway.app/">Open the project</a>
 
 ## Challenge specifications
 
@@ -35,9 +33,8 @@ Real-time chat interface where multiple users can interact with each other by se
 -  [React](https://reactjs.org/)
 -  [Supabase](https://supabase.com/) - database & realtime updates via websockets
 -  [Styled Components](https://styled-components.com/) - styling components in addition to plain CSS
--  [Heroku](https://www.heroku.com) - free cloud hosting platform
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-  [Vite](https://www.vitejs.dev) - frontend tooling
+-  [Railway](https://www.railway.app) - cloud hosting platform
 
 ## Running the project locally
 
@@ -54,15 +51,15 @@ Create Supabase table `messages` with the following columns:
 Create a `.env` file to project root containing your Supabase info:
 
 ```
-REACT_APP_SUPABASE_URL=<database_endpoint_url>
-REACT_APP_SUPABASE_KEY=<public_api_key>
+VITE_SUPABASE_URL=<database_endpoint_url>
+VITE_SUPABASE_KEY=<public_api_key>
 ```
 
 Run the following commands in the project directory:
 
 ```
-> npm install
-> npm start
+> yarn install
+> yarn start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
